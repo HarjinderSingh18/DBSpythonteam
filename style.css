@@ -1,0 +1,44 @@
+body{
+    background-color:#1f1f1f;
+    color: #ffffff;
+}
+.movie{
+    margin-left: 2vh;
+}
+.genre{
+    margin-left: 2vh;
+    padding: 6px;
+    border-radius: 15px;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+.genre:hover{
+    background-color: #cabdbd;
+    color: black;
+    border: none;
+}
+.description{
+    font-size:3vh;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+a{
+    color: #69a0e9;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+.username{
+    font-size: 16px;
+}
+.review{
+    padding: 3vh;
+    box-shadow: 0 4px 8px 0 rgba(141, 132, 132, 0.2);
+}
+.review:hover {
+    box-shadow: 0 8px 16px 0 rgba(204, 190, 190, 0.2);
+  }
+.review p{
+    font-size: 16px;
+}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<table>
+    <tr>
+        <th>Movies</th>
+    </tr>
+    {% for movie in movies %}
+        <tr>
+            <td><a href="movie/{{movie.id}}">{{movie.movie_title}}</a></td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock body %}

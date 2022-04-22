@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="movie">
+    <h1>{{movie.movie_title}}</h1>
+    <h4>{{movie.release_date}} | {{movie.duration}} Minutes</h4>
+    {% for genre in genres %}
+    <span class="genre">{{genre.genre}} </span>
+    {% endfor %}
+    <p class="description">{{movie.description}}</p>
+    <hr>
+    <h3>Director&nbsp;&nbsp;<a href="#">{{movie.director.director_name}}</a></h3>
+    <hr>
+    <h3>Stars&nbsp&nbsp
+        {% for actor in actors %}
+            <a href="#">{{actor.actor}}&nbsp;&nbsp;</a>
+        {% endfor %}
+    </h3>
+    <hr>
+    <div class="reviews">
+        <h3>User Reviews</h3>
+        {% for review in review_data %}
+            <div class="review">
+            <span style="font-size: 30px;color:goldenrod">&#9733</span><span style="font-size: 25px;">&nbsp;&nbsp;{{review.imdb.imdb_rating}}<span style="font-size: 18px;">/10</span>
+            {% if user.id == review.user.id %}
+            <span style="float: right;margin-right: 10px;"><input type="button" value="edit"></span>
+            <span style="float: right;margin-right: 10px;"><input type="button" value="delete" onclick="window.location.href='/delete/{{review.id}}'"></span>
+            {% endif %}
+            <h5 style="margin-top: 10px;margin-bottom: 2px;">{{review.imdb.imdb_rating_description}}</h5>
+            <span class="username"><a href="#">{{review.user}}</a>&nbsp;&nbsp;&nbsp;<insert>{{review.review_date}}</insert></span>
+            <p>{{review.review_description}}</p>
+            </div>
+        {% endfor %}
+    </div>
+    {% if not reviewed%}
+    <form action="" method="post">
+        {% if message %}
+        <div>
+            {{message}}
+        </div>
+        {% endif %}
+        {% csrf_token %}
+        <div>
+            <input type="range" name="rating" id="rating" min=1 max=10>
+            <label for="rating">Rating</label>
+        </div>
+        <div><textarea name="review_title" cols="30" rows="1" placeholder="Review Title"></textarea></div>
+        <div><textarea name="review" cols="30" rows="3" placeholder="Description"></textarea></div>
+        <input type="submit" value="Rate">
+    </form>
+    {% endif %}
+</div>
+{% endblock body %}

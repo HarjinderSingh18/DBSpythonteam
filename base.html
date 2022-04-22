@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{{title}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"> 
+        <style>
+            *{
+                font-family: 'Montserrat', 'sans-serif';
+            }
+        </style>
+    </head>
+    <body>
+        <style>
+            ul {
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
+              background-color: #333;
+            }
+            
+            li {
+              float: left;
+            }
+            
+            li a {
+              display: block;
+              color: white;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+            }
+            
+            li a:hover:not(.active) {
+              background-color: #111;
+            }
+            
+            .active {
+              background-color: #04AA6D;
+            }
+            </style>
+            </head>
+            <body>
+            
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="#">News</a></li>
+              <li><a href="#">Contact</a></li>
+              <li style="float:right">
+                {% if logged_in %}  
+                <a class="active" href="/logout">Logout</a></li>
+                {% else %}
+                <a class="active" href="/login">Login</a></li>
+                {% endif %}
+            </ul>
+        {% block body %}
+        {% endblock body %}
+    </body>
+</html>

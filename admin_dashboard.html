@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block body %}
+<div>
+    <table align="center" cellpadding="10" border="2">
+        <tr>
+            <th>Actors</th>
+            <th>Delete</th>
+        </tr>
+        {% for actor in actors %}
+        <tr> 
+            <td>{{actor.name}}</td>
+            <td><a href="/admin/actor/{{actor.id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="2" align="center"><a href="/admin/actor">Add Actor</a></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <table align="center" cellpadding="10" border="2">
+        <tr>
+            <th>Movies</th>
+            <th>Delete</th>
+        </tr>
+        
+            {% for movie in movies %}
+            <tr>
+                <td>{{movie.movie_title}}</td>
+                <td><a href="/admin/movie/{{movie.id}}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        <tr>
+            <td colspan="2" align="center"><a href="/admin/movie">Add Movie</a></td>
+        </tr>
+    </table>
+    <a href="/admin/logout">Logout</a>
+</div>
+{% endblock body %}

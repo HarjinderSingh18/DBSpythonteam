@@ -1,36 +1,28 @@
+from curses.ascii import US
 from app.models import *
 import datetime
 
-def addMovie(movie_data):
-    """
-    This function recieve a python dictionary with all movie related data
-    director_id, title, genre, type, date, duration, description
-    """
-    tmp_movie = Movie()
-    tmp_movie.director = Director.objects.filter(pk=movie_data['director_id'])[0]
-    tmp_movie.movie_title = movie_data['movie_title']
-    tmp_movie.movie_type = movie_data['movie_type']
-    tmp_movie.release_date = datetime.datetime.strptime(movie_data['release_date'],"%Y-%m-%d").date()
-    tmp_movie.duration = movie_data['duration']
-    tmp_movie.description = movie_data['description']
-    tmp_movie.save()
-    for i in movie_data['genres']:
-        tmp_genre = Genre.objects.get(pk=i)
-        Ass_Genre_Movie.objects.create(genre=tmp_genre,movie=tmp_movie)
-    for i in movie_data["actors"]:
-        tmp_actor = Actor.objects.get(pk=i)
-        Ass_Actor_Movie.objects.create(actor=tmp_actor,movie=tmp_movie)
+def createUser(user_data):
+    tmp_user = User()
+    tmp_user.name = user_data['name']
+    tmp_user.gender = user_data['gender']
+    tmp_user.age = user_data['age']
+    tmp_user.email = user_data['email']
+    tmp_user.address = user_data['address']
+    tmp_user.username = user_data['username']
+    tmp_user.password = user_data['password']
+    tmp_user.save()
 
-def addActor(actor_data):
-    """
-    This function recieve a python dictionary with all actor related data
-    director_id, title, genre, type, date, duration, description
-    """
-    tmp_actor = Actor()
-    tmp_actor.name = actor_data['name']
-    tmp_actor.actor_type = actor_data['actor_type']
-    tmp_actor.gender = actor_data['gender']
-    tmp_actor.age = actor_data['age']
-    tmp_actor.bio = actor_data['bio']
-    tmp_actor.other_details = actor_data['other_details']
-    tmp_actor.save()
+def makeReview(review_data):
+    tmp_imdb = IMDB_Rating()
+    tmp_imdb.imdb_rating = review_data["rating"]
+    tmp_imdb.imdb_rating_description = review_data["review_title"]
+    tmp_imdb.save()
+    
+    tmp_movie_review = Movie_Review()
+    tmp_movie_review.imdb = tmp_imdb
+    tmp_movie_review.review_date = datetime.datetime.now().date()
+    tmp_movie_review.review_description = review_data["review"]
+    tmp_movie_review.movie = Movie.objects.get(pk=review_data["movie_id"])
+    tmp_movie_review.user = User.objects.get(pk=review_data["user_id"])
+    tmp_movie_review.save()
